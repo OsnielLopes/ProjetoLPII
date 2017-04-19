@@ -1,0 +1,11 @@
+10
+Corinthians#Arena Corinthians
+São Paulo#Morumbi
+Palmeiras#Allianz Parque
+Santos#Vila Belmiro
+Flamengo#Maracanã
+Ponte Preta#Moisés Lucarelli
+Fluminense#Laranjeiras
+Vasco#São Januário
+Cruzeiro#Mineirão
+Atlético Mineiro#Independencia Mineirão
