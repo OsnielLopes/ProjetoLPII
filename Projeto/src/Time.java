@@ -1,20 +1,25 @@
 public class Time {
     private String nome;
-    private String local;
+    private String cidade;
+    private String estado;
     
-    public Time(String nome, String local){
+    public Time(String nome, String cidade, String estado){
         this.nome = nome;
-        this.local = local;
+        this.cidade = cidade;
+        this.estado = estado;
     }
     public String getNome(){
        return this.nome;
     }
-    //Verificar melhor local para implementar o método abaixo
-    public static String getNome(String local){
+    //Arrumar depois ...
+    public static String getNome(String cidade){
         return null;
     }
-    public String getLocal(){
-        return this.local;
+    public String getCidade(){
+        return this.cidade;
+    }
+    public String getEstado(){
+        return this.estado;
     }
     
 }
