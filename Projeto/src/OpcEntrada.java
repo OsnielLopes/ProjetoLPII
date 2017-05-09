@@ -1,4 +1,4 @@
 
 public enum OpcEntrada {
-    Console, Tela;
+    Console, Arquivo;
 }

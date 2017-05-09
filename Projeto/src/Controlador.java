@@ -2,14 +2,18 @@ import java.io.*;
 
 public class Controlador {
     public static void main(String[] args){
-        //Exibir Tela - Opção Arquivo/Texto
         OpcEntrada opc = Tela.opcLeitura();
         if (opc.equals(OpcEntrada.Console)){
-            //Fazer um for para a pessoa entrar com os times
-        }else if (opc.equals(OpcEntrada.Tela)){
+            int qtdTimes = Tela.qtdTimes();
+            Time times[] = new Time[qtdTimes];
+            for(int i = 0; i < qtdTimes; i++){
+                String time[] = Tela.digitaTime();
+                times[i] = new Time(time[0], time[1], time[2]);
+            }
+        }else if (opc.equals(OpcEntrada.Arquivo)){
             //Exibir Tela para a pessoa escrever o nome do arquivo
             //Exibir tela para a pessoa colocar o separador
-            leitura(filename, separador);
+           // leitura(filename, separador);
         }
         
         
