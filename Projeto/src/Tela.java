@@ -1,4 +1,6 @@
 import javax.swing.*;
+import org.json.*;
+import java.io.*;
 public class Tela {
     public static OpcEntrada opcLeitura(){
         Object[] opcoes1 = { "Escrever Times Manualmente", "Importar Times de um arquivo" };
