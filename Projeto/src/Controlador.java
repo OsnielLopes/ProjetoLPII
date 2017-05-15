@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class Controlador {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         OpcEntrada opc = Tela.opcLeitura();
         if (opc.equals(OpcEntrada.Console)){
             int qtdTimes = Tela.qtdTimes();
