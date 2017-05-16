@@ -6,10 +6,16 @@ public class Controlador {
         if (opc.equals(OpcEntrada.Console)){
             int qtdTimes = Tela.qtdTimes();
             Time times[] = new Time[qtdTimes];
-            for(int i = 0; i < qtdTimes; i++){
+            int i = 0;
+            do{
+                System.out.println(qtdTimes);
+                System.out.println(i);
                 String time[] = Tela.digitaTime();
-                times[i] = new Time(time[0], time[1], time[2]);
-            }
+                if (time != null){
+                    times[i] = new Time(time[0], time[1], time[2]);
+                    i+=1;
+                }
+            }while (i < qtdTimes);
         }else if (opc.equals(OpcEntrada.Arquivo)){
             //Exibir Tela para a pessoa escrever o nome do arquivo
             //Exibir tela para a pessoa colocar o separador
