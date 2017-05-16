@@ -27,6 +27,36 @@ public class Tela {
         return quantidade;
     }
     
+    public static String[] getInfoLeituraArquivo(){
+        Object[] opcoes = { "OK", "Cancelar" };
+        
+        JPanel panel = new JPanel();
+        
+        JLabel labelNomeArquivo = new JLabel("Nome do arquivo: ");
+        panel.add(labelNomeArquivo);
+        JTextField textFieldNomeArquivo= new JTextField(10);
+        panel.add(textFieldNomeArquivo);
+        
+        JLabel labelSeparador = new JLabel("Separador das informações do time: ");
+        panel.add(labelSeparador);
+        JTextField textFieldSeparador = new JTextField(10);
+        panel.add(textFieldSeparador);
+
+        int result = JOptionPane.showOptionDialog(null, panel, "Tabela de Jogos", 
+                     JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, opcoes, null);
+        if (result == JOptionPane.YES_OPTION){
+            String arquivo = textFieldNomeArquivo.getText();
+            String separador = textFieldSeparador.getText();
+            if (arquivo.isEmpty() || arquivo.equals(" ") ||
+                    separador.isEmpty() || separador.equals(" ")){
+                return null;
+            }
+            return new String[] {arquivo,separador};
+        }else{
+            return null;
+        }
+    }
+    
       // A tela de interação para pedir: nome - cidade - estado para o usuario
     public static String[] digitaTime(){
         Object[] opcoes = { "OK", "Cancelar" };
