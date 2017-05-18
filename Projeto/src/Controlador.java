@@ -9,10 +9,7 @@ public class Controlador {
         }else if (opc.equals(OpcEntrada.Arquivo)){
             String[] infoLeituraArquivo = Tela.getInfoLeituraArquivo();
             times = leitura(infoLeituraArquivo[0],infoLeituraArquivo[1]);
-        }
-        
-        
-        
+        }    
     }
     //Instanciar Times Manualmente
     private static Time[] leitura(){
