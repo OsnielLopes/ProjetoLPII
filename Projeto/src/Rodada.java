@@ -29,6 +29,12 @@ public class Rodada {
         return this.data;
     }
     
+    public String getDataFormatada(){
+        return Integer.toString(this.data.get(Calendar.DAY_OF_MONTH))+
+                "/"+Integer.toString(this.data.get(Calendar.MONTH))+
+                "/"+Integer.toString(this.data.get(Calendar.YEAR));
+    }
+    
     public Partida getPartida(int i){
         return this.partidas[i];
     }

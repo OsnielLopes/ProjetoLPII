@@ -1,6 +1,6 @@
 5
-Corinthians#S‹o Paulo#S‹o Paulo
-Sao Paulo#S‹o Paulo#S‹o Paulo
-Time#Cidade#Estado
-Time2#Cidade#Estado
-Time3#Cidade#Estado
+Sao Paulo#Sao Paulo#SP
+Vasco da Gama#Rio de Janeiro#RJ
+Chapecoense#Chapeco#SC
+Corinthians#Sao Paulo#SP
+Curitiba#Curitiba#PR

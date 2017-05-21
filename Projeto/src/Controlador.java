@@ -1,6 +1,5 @@
 
 import java.io.*;
-import static java.lang.System.in;
 import java.util.Calendar;
 
 public class Controlador {
@@ -19,14 +18,14 @@ public class Controlador {
         boolean qtdTimesEPar = qtdTimes % 2 == 0;
         Calendar data = Tela.inicioDosJogos();
 
-        int qtdRodadas = 0;
+        int qtdRodadas;
         if (qtdTimesEPar) {
             qtdRodadas = 2 * qtdTimes - 2;
         } else {
             qtdRodadas = 2 * qtdTimes;
         }
 
-        int qtdPartidasPorRodada = 0;
+        int qtdPartidasPorRodada;
         if (qtdTimesEPar) {
             qtdPartidasPorRodada = qtdTimes / 2;
         } else {
@@ -45,12 +44,30 @@ public class Controlador {
                 linha2[j] = null;
             }
         }
-        //cria rodadas do turno
+        //cria rodadas
         for (int i = 0; i < qtdRodadas; i++) {
 
             rodadas[i] = new Rodada(qtdPartidasPorRodada);
             rodadas[i].setData((Calendar) data.clone());
-            data.add(Calendar.WEEK_OF_MONTH, 1);
+            int ano = data.get(Calendar.YEAR);
+            int mes = data.get(Calendar.MONTH);
+            int dia = data.get(Calendar.DAY_OF_MONTH);
+            if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12 && 31 - dia < 7) {
+                data.set(Calendar.DAY_OF_MONTH, dia - 24);
+                data.add(Calendar.MONTH, 1);
+            } else if (mes != 2 && 30 - dia < 7) {
+                data.set(Calendar.DAY_OF_MONTH, dia - 23);
+                data.add(Calendar.MONTH, 1);
+            } else if (ano % 400 == 0 || (ano % 4 == 0 && ano % 100 != 0) && mes == 2 && 29 - dia < 7) {
+                data.set(Calendar.DAY_OF_MONTH, dia - 22);
+                data.add(Calendar.MONTH, 1);
+            } else if (mes == 2 && 28-dia<7){
+                data.set(Calendar.DAY_OF_MONTH, dia - 21);
+                data.add(Calendar.MONTH, 1);
+            }
+            else {
+                data.add(Calendar.WEEK_OF_MONTH, 1);
+            }
 
             //cria partidas e adiciona na rodada
             for (int j = 0; j < qtdPartidasPorRodada; j++) {
@@ -74,32 +91,34 @@ public class Controlador {
         }
 
         //define mando de campo
-        for (int i = 0; i < qtdRodadas; i++) {
-            Partida p = rodadas[i].getPartida(0);
-            for (int k = 1; k < qtdPartidasPorRodada; k += 2) {
-
-                if (p.getAdversários()[1] == null) {
-                    p.setLocal(null);
-                } else {
-                    p.setLocal(p.getAdversários()[1].getCasa());
+        for (int ir = 0; ir < qtdRodadas; ir++) {
+            for (int ip = 0; ip < qtdPartidasPorRodada; ip++) {
+                Partida p = rodadas[ir].getPartida(ip);
+                if (ip % 2 != 0) {
+                    p.trocaMando();
                 }
-            }
-            for (int k = 0; k < qtdPartidasPorRodada; k += 2) {
-
-                if (p.getAdversários()[0] == null) {
-                    p.setLocal(null);
-                } else {
-                    p.setLocal(p.getAdversários()[0].getCasa());
+                if (ir % 2 != 0 && ip == 0) {
+                    p.trocaMando();
                 }
-            }
-            if (i > qtdRodadas / 2) {
-                p.trocaLocal();
+                Time timeDaCasa = p.getAdversarios()[0];
+                if (timeDaCasa != null) {
+                    p.setLocal(p.getAdversarios()[0].getCasa());
+                } else {
+                    p.setLocal(null);
+                }
             }
         }
 
+        int maiorNome = 0;
+        for (Time t : times) {
+            if (t.getNome().length() > maiorNome) {
+                maiorNome = t.getNome().length();
+            }
+        }
         OpcMenu opcMenu = null;
         do {
-            opcMenu = Tela.menu();
+            opcMenu = OpcMenu.gravarArquivo;
+            //opcMenu = Tela.menu();
             if (opcMenu == OpcMenu.pesquisar) {
                 String resposta = "";
                 Filtro opcPesquisa = Tela.escolheFormaPesquisa();
@@ -110,20 +129,20 @@ public class Controlador {
                         for (int i = 0; i < qtdRodadas; i++) {
                             for (int j = 0; j < qtdPartidasPorRodada; j++) {
                                 Partida p = rodadas[i].getPartida(j);
-                                Time[] adversarios = p.getAdversários();
+                                Time[] adversarios = p.getAdversarios();
                                 if (adversarios[0] == time || adversarios[1] == time) {
                                     if (adversarios[0] == null) {
-                                        resposta += "\nRodada " + (i + 1) + " - "
-                                                + adversarios[1].getNome() + " não jogará";
+                                        resposta += "Rodada " + (i + 1) + " - "
+                                                + adversarios[1].getNome() + " não jogará\n";
                                     } else if (adversarios[1] == null) {
-                                        resposta += "\nRodada " + (i + 1) + " - "
-                                                + adversarios[0].getNome() + " não jogará";
+                                        resposta += "Rodada " + (i + 1) + " - "
+                                                + adversarios[0].getNome() + " não jogará\n";
                                     } else {
-                                        resposta += "\nRodada " + (i + 1) + " - "
+                                        resposta += "Rodada " + (i + 1) + " - "
                                                 + adversarios[0].getNome() + " vs "
                                                 + adversarios[1].getNome() + " - "
                                                 + p.getLocal().getCidade() + "/"
-                                                + p.getLocal().getEstado();
+                                                + p.getLocal().getEstado() + "\n";
                                     }
                                 }
                             }
@@ -134,20 +153,20 @@ public class Controlador {
                         for (int i = 0; i < qtdRodadas; i++) {
                             for (int j = 0; j < qtdPartidasPorRodada; j++) {
                                 Partida p = rodadas[i].getPartida(j);
-                                Time[] adversarios = p.getAdversários();
-                                if (p.getLocal().getCidade() == cidade) {
+                                Time[] adversarios = p.getAdversarios();
+                                if (p.getLocal().getCidade().equals(cidade)) {
                                     if (adversarios[0] == null) {
-                                        resposta += "\nRodada " + (i + 1) + " - "
-                                                + adversarios[1].getNome() + " não jogará";
+                                        resposta += "Rodada " + (i + 1) + " - "
+                                                + adversarios[1].getNome() + " não jogará\n";
                                     } else if (adversarios[1] == null) {
-                                        resposta += "\nRodada " + (i + 1) + " - "
-                                                + adversarios[0].getNome() + " não jogará";
+                                        resposta += "Rodada " + (i + 1) + " - "
+                                                + adversarios[0].getNome() + " não jogará\n";
                                     } else {
-                                        resposta += "\nRodada " + (i + 1) + " - "
+                                        resposta += "Rodada " + (i + 1) + " - "
                                                 + adversarios[0].getNome() + " vs "
                                                 + adversarios[1].getNome() + " - "
                                                 + p.getLocal().getCidade() + "/"
-                                                + p.getLocal().getEstado();
+                                                + p.getLocal().getEstado() + "\n";
                                     }
                                 }
                             }
@@ -158,20 +177,20 @@ public class Controlador {
                         for (int i = 0; i < qtdRodadas; i++) {
                             for (int j = 0; j < qtdPartidasPorRodada; j++) {
                                 Partida p = rodadas[i].getPartida(j);
-                                Time[] adversarios = p.getAdversários();
-                                if (p.getLocal().getEstado() == estado) {
+                                Time[] adversarios = p.getAdversarios();
+                                if (p.getLocal().getEstado().equals(estado)) {
                                     if (adversarios[0] == null) {
-                                        resposta += "\nRodada " + (i + 1) + " - "
-                                                + adversarios[1].getNome() + " não jogará";
+                                        resposta += "Rodada " + (i + 1) + " - "
+                                                + adversarios[1].getNome() + " não jogará\n";
                                     } else if (adversarios[1] == null) {
-                                        resposta += "\nRodada " + (i + 1) + " - "
-                                                + adversarios[0].getNome() + " não jogará";
+                                        resposta += "Rodada " + (i + 1) + " - "
+                                                + adversarios[0].getNome() + " não jogará\n";
                                     } else {
-                                        resposta += "\nRodada " + (i + 1) + " - "
+                                        resposta += "Rodada " + (i + 1) + " - "
                                                 + adversarios[0].getNome() + " vs "
                                                 + adversarios[1].getNome() + " - "
                                                 + p.getLocal().getCidade() + "/"
-                                                + p.getLocal().getEstado();
+                                                + p.getLocal().getEstado() + "\n";
                                     }
                                 }
                             }
@@ -183,28 +202,55 @@ public class Controlador {
                             if (rodadas[i].getData().get(Calendar.MONTH) == mes) {
                                 for (int j = 0; j < qtdPartidasPorRodada; j++) {
                                     Partida p = rodadas[i].getPartida(j);
-                                    Time[] adversarios = p.getAdversários();
+                                    Time[] adversarios = p.getAdversarios();
                                     if (adversarios[0] == null) {
-                                        resposta += "\nRodada " + (i + 1) + " - "
-                                                + adversarios[1].getNome() + " não jogará";
+                                        resposta += "Rodada " + (i + 1) + " - "
+                                                + adversarios[1].getNome() + " não jogará\n";
                                     } else if (adversarios[1] == null) {
-                                        resposta += "\nRodada " + (i + 1) + " - "
-                                                + adversarios[0].getNome() + " não jogará";
+                                        resposta += "Rodada " + (i + 1) + " - "
+                                                + adversarios[0].getNome() + " não jogará\n";
                                     } else {
-                                        resposta += "\nRodada " + (i + 1) + " - "
+                                        resposta += "Rodada " + (i + 1) + " - "
                                                 + adversarios[0].getNome() + " vs "
                                                 + adversarios[1].getNome() + " - "
                                                 + p.getLocal().getCidade() + "/"
-                                                + p.getLocal().getEstado();
+                                                + p.getLocal().getEstado() + "\n";
                                     }
                                 }
                             }
                         }
                 }
                 Tela.exibeResultado(resposta);
-            }else if(opcMenu == OpcMenu.gravarArquivo){
-                
+            } else if (opcMenu == OpcMenu.gravarArquivo) {
+                String nomeArquivo = "teste.txt";
+                //String nomeArquivo = Tela.informaNomeArquivo();
+                if (!nomeArquivo.contains(".txt")) {
+                    nomeArquivo += ".txt";
+                }
+
+                PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(nomeArquivo), "UTF-8"));
+                for (int i = 0; i < qtdRodadas; i++) {
+                    pw.write("Rodada " + (i + 1) + "   " + rodadas[i].getDataFormatada() + ":\n");
+                    String naoJoga = "";
+                    for (int j = 0; j < qtdPartidasPorRodada; j++) {
+                        String resposta = "";
+                        Partida p = rodadas[i].getPartida(j);
+                        resposta += p.toString(maiorNome) + "\n";
+                        if (resposta.contains("não jogará")) {
+                            naoJoga = resposta;
+                        } else {
+                            pw.write(resposta);
+                        }
+                    }
+                    if (!naoJoga.isEmpty()) {
+                        pw.write(naoJoga);
+                    }
+                    pw.write("\n");
+                }
+                pw.close();
+
             }
+            opcMenu = OpcMenu.sair;
         } while (opcMenu != OpcMenu.sair);
 
     }
@@ -237,23 +283,4 @@ public class Controlador {
         fr.close();
         return times;
     }
-
 }
-//            String lin1 = "";
-//            for (Time t: linha1){
-//                if(t!=null){
-//                    lin1 += t.getNome()+ " --- ";
-//                }else{
-//                    lin1 += "vazio"+ " --- ";
-//                }
-//            }
-//            String lin2 = "";
-//            for (Time t: linha2){
-//                if(t!=null){
-//                    lin2 += t.getNome()+ " --- ";
-//                }else{
-//                    lin2 += "vazio"+ " --- ";
-//                }
-//            }
-//            System.out.println(lin1);
-//            System.out.println(lin2);

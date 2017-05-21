@@ -1,44 +1,51 @@
-import java.util.*;
+
 public class Partida {
-    
+
     private Time timeA;
     private Time timeB;
     private Local local;
-    
-    public Partida(Time timeA, Time timeB){
+
+    public Partida(Time timeA, Time timeB) {
         this.timeA = timeA;
         this.timeB = timeB;
     }
-    
-    public void setLocal(Local l){
+
+    public void setLocal(Local l) {
         this.local = l;
     }
-    
-    public void trocaLocal(){
-        if(this.local != null){
-            if(timeA.getCasa() == this.local){
-                this.local = timeB.getCasa();
-            }else{
-                this.local = timeA.getCasa();
-            }
-        }
+
+    public void trocaMando() {
+        Time pivo = timeA;
+        timeA = timeB;
+        timeB = pivo;
     }
-    
-    public Local getLocal(){
+
+    public Local getLocal() {
         return this.local;
     }
-    public Time[] getAdversários(){
+
+    public Time[] getAdversarios() {
         Time adversarios[] = {timeA, timeB};
         return adversarios;
     }
-    
-    @Override
-    public String toString(){
-        if(this.timeA==null)
-            return this.timeB.getNome()+" nao joga";
-        else if(this.timeB==null)
-            return this.timeA.getNome()+" nao joga";
-        else
-            return this.timeA.getNome()+" vs "+this.timeB.getNome();
+
+    public String toString(int maior) {
+        if (this.timeA == null) {
+            return "   "+this.timeB.getNome() + " não jogará";
+        } else if (this.timeB == null) {
+            return "   "+this.timeA.getNome() + " não jogará";
+        } else if (this.local == null){
+            return String.format("   %-" + maior + "s", this.timeA.getNome())
+                    + String.format(" vs %-" + maior + "s", this.timeB.getNome())
+                    + " - local nulo";
+        }
+        else {
+            return String.format("   %-" + maior + "s", this.timeA.getNome())
+                    + String.format(" vs %-" + maior + "s", this.timeB.getNome())
+                    + " - "
+                    + this.local.getCidade() + "/"
+                    + this.local.getEstado();
+        }
+
     }
 }

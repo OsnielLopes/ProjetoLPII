@@ -95,7 +95,7 @@ public class Tela {
     //Implementar método que exibe uma tela para a pessoa colocar a data inicial dos jogos
     static Calendar inicioDosJogos() {
         Calendar c = Calendar.getInstance();
-        c.set(2017, 6, 10);
+        c.set(2016, 2, 10);
         return c;
     }
 
@@ -133,6 +133,11 @@ public class Tela {
 
     //exibir resultado da pesquisa
     static void exibeResultado(String resposta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    //exibe uma tela para que o usuário escreva o nome do arquivo que será gravado 
+    static String informaNomeArquivo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
