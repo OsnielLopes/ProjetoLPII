@@ -1,3 +1,3 @@
 public enum OpcMenu {
-    pesquisar,gravarArquivo,sair;
+    pesquisar, gravarArquivo, sair;
 }
