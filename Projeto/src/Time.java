@@ -1,12 +1,10 @@
 public class Time {
     private String nome;
-    private String cidade;
-    private String estado;
+    private Local casa;
     
     public Time(String nome, String cidade, String estado){
         this.nome = nome;
-        this.cidade = cidade;
-        this.estado = estado;
+        this.casa = new Local(cidade,estado);
     }
     public String getNome(){
        return this.nome;
@@ -16,10 +14,14 @@ public class Time {
         return null;
     }
     public String getCidade(){
-        return this.cidade;
+        return this.casa.getCidade();
     }
     public String getEstado(){
-        return this.estado;
+        return this.casa.getEstado();
+    }
+    
+    public Local getCasa(){
+        return this.casa;
     }
     
 }

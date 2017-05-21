@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import javax.swing.*;
 public class Tela {
     public static OpcEntrada opcLeitura(){
@@ -89,6 +90,50 @@ public class Tela {
         }else{
             return null;
         }
+    }
+
+    //Implementar método que exibe uma tela para a pessoa colocar a data inicial dos jogos
+    static Calendar inicioDosJogos() {
+        Calendar c = Calendar.getInstance();
+        c.set(2017, 6, 10);
+        return c;
+    }
+
+    //Implementar uma tela onde o usuario pode escolher entre 3 botoes: pesquisar, gerar arquivo e sair
+    static OpcMenu menu() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    //Implementar uma tela onde o usuario pode escolher entre as seguintes pesquisas:
+    //jogos de um determinado time; jogos que ocorrerâo em uma determinada cidade;
+    //jogos que ocorrerâo em um determinado estado; (d) jogos que ocorrerâo em um determinado mês.
+    static Filtro escolheFormaPesquisa() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    //exibir um ComboBox com os nomes dos times, retornar indice escolhido
+    static int escolhaTime(Time[] times) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    //permitir que a pessoa digite o nome da cidade
+    static String leCidade() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    //permitir que a pessoa digite o nome do estado
+    static String leEstado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    //exibir combobox com os meses do ano, retornar o numero do mes
+    static int escolheMes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    //exibir resultado da pesquisa
+    static void exibeResultado(String resposta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
