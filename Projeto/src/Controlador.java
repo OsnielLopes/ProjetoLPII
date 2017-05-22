@@ -142,35 +142,37 @@ public class Controlador {
                             for (int j = 0; j < qtdPartidasPorRodada; j++) {
                                 Partida p = rodadas[i].getPartida(j);
                                 Time[] adversarios = p.getAdversarios();
-                                if (p.getLocal() != null && adversarios[0]!=null && adversarios[1]!=null) {
+                                if (p.getLocal() != null && adversarios[0] != null && adversarios[1] != null) {
                                     if (p.getLocal().getCidade().equals(cidade)) {
                                         resposta += "Rodada " + (i + 1) + "   "
-                                            + rodadas[i].getDataFormatada() + "   " + p.toString()
-                                            + "\n";
+                                                + rodadas[i].getDataFormatada() + "   " + p.toString()
+                                                + "\n";
                                     }
                                 }
                             }
                         }
                         break;
                     case estado:
-                        String estado = Tela.leEstado();
+                        String estado = Tela.leEstado(times);
                         for (int i = 0; i < qtdRodadas; i++) {
                             for (int j = 0; j < qtdPartidasPorRodada; j++) {
                                 Partida p = rodadas[i].getPartida(j);
                                 Time[] adversarios = p.getAdversarios();
-                                if (p.getLocal().getEstado().equals(estado)) {
-                                    if (adversarios[0] == null) {
-                                        resposta += "Rodada " + (i + 1) + " - "
-                                                + adversarios[1].getNome() + " não jogará\n";
-                                    } else if (adversarios[1] == null) {
-                                        resposta += "Rodada " + (i + 1) + " - "
-                                                + adversarios[0].getNome() + " não jogará\n";
-                                    } else {
-                                        resposta += "Rodada " + (i + 1) + " - "
-                                                + adversarios[0].getNome() + " vs "
-                                                + adversarios[1].getNome() + " - "
-                                                + p.getLocal().getCidade() + "/"
-                                                + p.getLocal().getEstado() + "\n";
+                                if (p.getLocal() != null && adversarios[0] != null && adversarios[1] != null) {
+                                    if (p.getLocal().getEstado().equals(estado) ) {
+                                        if (adversarios[0] == null) {
+                                            resposta += "Rodada " + (i + 1) + " - "
+                                                    + adversarios[1].getNome() + " não jogará\n";
+                                        } else if (adversarios[1] == null) {
+                                            resposta += "Rodada " + (i + 1) + " - "
+                                                    + adversarios[0].getNome() + " não jogará\n";
+                                        } else {
+                                            resposta += "Rodada " + (i + 1) + " - "
+                                                    + adversarios[0].getNome() + " vs "
+                                                    + adversarios[1].getNome() + " - "
+                                                    + p.getLocal().getCidade() + "/"
+                                                    + p.getLocal().getEstado() + "\n";
+                                        }
                                     }
                                 }
                             }
