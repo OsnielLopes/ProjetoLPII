@@ -31,17 +31,28 @@ public class Partida {
 
     public String toString(int maior) {
         if (this.timeA == null) {
-            return "   "+this.timeB.getNome() + " não jogará";
+            return "   " + this.timeB.getNome() + " não jogará";
         } else if (this.timeB == null) {
-            return "   "+this.timeA.getNome() + " não jogará";
-        } else if (this.local == null){
+            return "   " + this.timeA.getNome() + " não jogará";
+        } else {
             return String.format("   %-" + maior + "s", this.timeA.getNome())
                     + String.format(" vs %-" + maior + "s", this.timeB.getNome())
-                    + " - local nulo";
+                    + " - "
+                    + this.local.getCidade() + "/"
+                    + this.local.getEstado();
         }
-        else {
-            return String.format("   %-" + maior + "s", this.timeA.getNome())
-                    + String.format(" vs %-" + maior + "s", this.timeB.getNome())
+
+    }
+
+    @Override
+    public String toString() {
+        if (this.timeA == null) {
+            return this.timeB.getNome() + " não jogará";
+        } else if (this.timeB == null) {
+            return this.timeA.getNome() + " não jogará";
+        } else {
+            return this.timeA.getNome()
+                    + " vs " + this.timeB.getNome()
                     + " - "
                     + this.local.getCidade() + "/"
                     + this.local.getEstado();

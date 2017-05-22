@@ -23,5 +23,6 @@ public class Time {
     public Local getCasa(){
         return this.casa;
     }
+   
     
 }
