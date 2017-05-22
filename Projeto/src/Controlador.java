@@ -11,7 +11,9 @@ public class Controlador {
             times = leitura();
         } else if (opc.equals(OpcEntrada.Arquivo)) {
             String[] infoLeituraArquivo = Tela.getInfoLeituraArquivo();
+            do{
             times = leitura(infoLeituraArquivo[0], infoLeituraArquivo[1]);
+            }while(times==null);
         }
 
         int qtdTimes = times.length;
@@ -230,6 +232,7 @@ public class Controlador {
                     pw.write("\n");
                 }
                 pw.close();
+                Tela.arquivoGravado();
 
             }
             //opcMenu = OpcMenu.sair;
@@ -254,15 +257,20 @@ public class Controlador {
 
     //Instanciando times a partir de um arquivo
     private static Time[] leitura(String filename, String separador) throws FileNotFoundException, IOException {
-        FileReader fr = new FileReader(filename);
-        BufferedReader in = new BufferedReader(fr);
-        int qtdTimes = Integer.parseInt(in.readLine());
-        Time times[] = new Time[qtdTimes];
-        for (int i = 0; i < qtdTimes; i++) {
-            String linha[] = in.readLine().split(separador);
-            times[i] = new Time(linha[0], linha[1], linha[2]);
+        Time[] times = null;
+        try (FileReader fr = new FileReader(filename)) {
+            BufferedReader in = new BufferedReader(fr);
+            int qtdTimes = Integer.parseInt(in.readLine());
+            times = new Time[qtdTimes];
+            for (int i = 0; i < qtdTimes; i++) {
+                String linha[] = in.readLine().split(separador);
+                times[i] = new Time(linha[0], linha[1], linha[2]);
+            }
+        }catch (FileNotFoundException e){
+            Tela.arquivoNaoEncontrado();
+        }catch (IllegalArgumentException e){
+            Tela.separadorErrado();
         }
-        fr.close();
         return times;
     }
 }
