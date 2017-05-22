@@ -10,10 +10,10 @@ public class Controlador {
         if (opc.equals(OpcEntrada.Console)) {
             times = leitura();
         } else if (opc.equals(OpcEntrada.Arquivo)) {
-            String[] infoLeituraArquivo = Tela.getInfoLeituraArquivo();
-            do{
-            times = leitura(infoLeituraArquivo[0], infoLeituraArquivo[1]);
-            }while(times==null);
+            do {
+                String[] infoLeituraArquivo = Tela.getInfoLeituraArquivo();
+                times = leitura(infoLeituraArquivo[0], infoLeituraArquivo[1]);
+            } while (times == null);
         }
 
         int qtdTimes = times.length;
@@ -161,7 +161,7 @@ public class Controlador {
                                 Partida p = rodadas[i].getPartida(j);
                                 Time[] adversarios = p.getAdversarios();
                                 if (p.getLocal() != null && adversarios[0] != null && adversarios[1] != null) {
-                                    if (p.getLocal().getEstado().equals(estado) ) {
+                                    if (p.getLocal().getEstado().equals(estado)) {
                                         if (adversarios[0] == null) {
                                             resposta += "Rodada " + (i + 1) + " - "
                                                     + adversarios[1].getNome() + " não jogará\n";
@@ -266,11 +266,14 @@ public class Controlador {
                 String linha[] = in.readLine().split(separador);
                 times[i] = new Time(linha[0], linha[1], linha[2]);
             }
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             Tela.arquivoNaoEncontrado();
-        }catch (IllegalArgumentException e){
+            return null;
+        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
             Tela.separadorErrado();
+            return null;
         }
+        
         return times;
     }
 }

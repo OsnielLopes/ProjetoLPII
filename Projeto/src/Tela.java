@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import javax.swing.*;
 public class Tela {
@@ -160,11 +161,11 @@ public class Tela {
         return null;
     }
 
-    //Implementar uma tela onde o usuario pode escolher entre as seguintes pesquisas:
-    //jogos de um determinado time; jogos que ocorrerâo em uma determinada cidade;
-    //jogos que ocorrerâo em um determinado estado; (d) jogos que ocorrerâo em um determinado mês.
+    //Implementar uma tela onde o usuario pode escolher entre as pesquisas
     public static Filtro escolheFormaPesquisa() {
         JPanel panel = new JPanel();
+        JLabel label = new JLabel("Escolha um filtro: ");
+        panel.add(label);
         String[] filtro = {"Jogos de um time", "Jogos de uma cidade", "Jogos de um estado", "Jogos de um mês"};
         JComboBox comboBoxFiltro = new JComboBox(filtro);
         panel.add(comboBoxFiltro);
@@ -214,7 +215,7 @@ public class Tela {
         panel.add(comboBoxCidades);
         
         JOptionPane.showMessageDialog(null, panel);
-        
+          
         return times[comboBoxCidades.getSelectedIndex()].getCidade();
     }
 
@@ -244,6 +245,8 @@ public class Tela {
     //exibir combobox com os meses do ano, retornar o numero do mes
     public static int escolheMes() {
         JPanel panel = new JPanel();
+        JLabel labelEstado = new JLabel("Escolha um mês: ");
+        panel.add(labelEstado);
         String[] mes = {"Janeiro", "Fevereiro", "Março", "Abril","Maio","Junho","Julho",
                            "Agosto","Setembro","Outubro","Novembro","Dezembro"};
         JComboBox comboBoxMes = new JComboBox(mes);
@@ -255,7 +258,7 @@ public class Tela {
 
     //exibir resultado da pesquisa
     public static void exibeResultado(String resposta) {
-        if(resposta != null){
+        if(resposta != null && resposta != ""){
             JOptionPane.showMessageDialog(null, resposta);
         }else{
             JOptionPane.showMessageDialog(null, "Não há jogos registrados");

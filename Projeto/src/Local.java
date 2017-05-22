@@ -1,8 +1,3 @@
-
-/**
- *
- * @author osniellopesteixeira
- */
 public class Local {
 
     private String cidade;

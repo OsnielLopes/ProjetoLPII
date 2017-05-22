@@ -1,10 +1,5 @@
 
 import java.util.Calendar;
-
-/**
- *
- * @author osniellopesteixeira
- */
 public class Rodada {
 
     private Calendar data;
