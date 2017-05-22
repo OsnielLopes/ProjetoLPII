@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.*;
 public class Tela {
@@ -19,8 +20,8 @@ public class Tela {
     public static int qtdTimes(){
         int quantidade = 0;
         do{
-            quantidade = Integer.parseInt(JOptionPane.showInputDialog("Digite a quantidade de times.\nMinimo: 1 | Maximo: 30 "));
-        }while(quantidade < 1 || quantidade > 30);
+            quantidade = Integer.parseInt(JOptionPane.showInputDialog("Digite a quantidade de times.\nMinimo: 4 | Maximo: 30 "));
+        }while(quantidade < 4 || quantidade > 30);
         return quantidade;
     }
     
@@ -99,17 +100,17 @@ public class Tela {
         
         JLabel labelAno = new JLabel("Ano: ");
         panel.add(labelAno);
-        JTextField textFieldAno = new JTextField();
+        JTextField textFieldAno = new JTextField(5);
         panel.add(textFieldAno);
         
         JLabel labelMes = new JLabel("Mês: ");
         panel.add(labelMes);
-        JTextField textFieldMes = new JTextField();
+        JTextField textFieldMes = new JTextField(5);
         panel.add(textFieldMes);
         
         JLabel labelDia = new JLabel("Dia: ");
         panel.add(labelDia);
-        JTextField textFieldDia = new JTextField();
+        JTextField textFieldDia = new JTextField(5);
         panel.add(textFieldDia);
         
         int result = JOptionPane.showOptionDialog(null, panel, "Tabela de Jogos", 
@@ -130,7 +131,8 @@ public class Tela {
             return c;
         }
     }
-
+        return null;
+    }
     //Implementar uma tela onde o usuario pode escolher entre 3 botoes: pesquisar, gerar arquivo e sair
     
     public static OpcMenu menu(){
@@ -189,9 +191,32 @@ public class Tela {
         int indexTimes = comboBoxTimes.getSelectedIndex();
         return indexTimes;
     }
-
+//CIDIGO NOVO ARRAY
+    public static String leCidade(Time[] times) {
+        JPanel panel = new JPanel();
+        ArrayList<String> cidades = new ArrayList<String>();
+        for(int i = 0; i < times.length; i++){
+            cidades[i]0 = times[i].getCidade();
+        }
+        JLabel labelCidade = new JLabel("Digite a cidade escolhida: ");
+        panel.add(labelCidade);
+        JTextField textFieldCidade = new JTextField(10);
+        panel.add(textFieldCidade);
+        
+        int result = JOptionPane.showOptionDialog(null, panel, "Tabela de Jogos", 
+                     JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, opcoes, null);
+        if(result == JOptionPane.YES_OPTION){
+            String cidade = textFieldCidade.getText();
+            if (cidade.isEmpty() || cidade.equals(" ")){
+                return leCidade();
+            }
+            return cidade;
+        }
+        return leCidade();
+    }
+    //CODIGO LECidade que estava antes
     //permitir que a pessoa digite o nome da cidade
-    public static String leCidade() {
+    /*public static String leCidade() {
         Object opcoes[] = {"OK", "Cancelar"};
         JPanel panel = new JPanel();
         
@@ -210,7 +235,7 @@ public class Tela {
             return cidade;
         }
         return leCidade();
-    }
+    }*/
 
     //permitir que a pessoa digite o nome do estado
     public static String leEstado() {

@@ -118,7 +118,7 @@ public class Controlador {
         OpcMenu opcMenu = null;
         do {
             opcMenu = OpcMenu.gravarArquivo;
-            //opcMenu = Tela.menu();
+            opcMenu = Tela.menu();
             if (opcMenu == OpcMenu.pesquisar) {
                 String resposta = "";
                 Filtro opcPesquisa = Tela.escolheFormaPesquisa();
@@ -222,8 +222,8 @@ public class Controlador {
                 }
                 Tela.exibeResultado(resposta);
             } else if (opcMenu == OpcMenu.gravarArquivo) {
-                String nomeArquivo = "teste.txt";
-                //String nomeArquivo = Tela.informaNomeArquivo();
+                //String nomeArquivo = "teste.txt";
+                String nomeArquivo = Tela.informaNomeArquivo();
                 if (!nomeArquivo.contains(".txt")) {
                     nomeArquivo += ".txt";
                 }
@@ -250,7 +250,7 @@ public class Controlador {
                 pw.close();
 
             }
-            opcMenu = OpcMenu.sair;
+            //opcMenu = OpcMenu.sair;
         } while (opcMenu != OpcMenu.sair);
 
     }
