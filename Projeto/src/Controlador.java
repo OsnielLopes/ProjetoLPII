@@ -12,7 +12,9 @@ public class Controlador {
         } else if (opc.equals(OpcEntrada.Arquivo)) {
             do {
                 String[] infoLeituraArquivo = Tela.getInfoLeituraArquivo();
-                times = leitura(infoLeituraArquivo[0], infoLeituraArquivo[1]);
+                if (infoLeituraArquivo != null) {
+                    times = leitura(infoLeituraArquivo[0], infoLeituraArquivo[1]);
+                }
             } while (times == null);
         }
 
@@ -177,8 +179,8 @@ public class Controlador {
                                 for (int j = 0; j < qtdPartidasPorRodada; j++) {
                                     Partida p = rodadas[i].getPartida(j);
                                     resposta += "Rodada " + (i + 1) + "   "
-                                                + rodadas[i].getDataFormatada() + "   " + p.toString()
-                                                + "\n";
+                                            + rodadas[i].getDataFormatada() + "   " + p.toString()
+                                            + "\n";
                                 }
                             }
                         }
@@ -252,7 +254,7 @@ public class Controlador {
             Tela.separadorErrado();
             return null;
         }
-        
+
         return times;
     }
 }
