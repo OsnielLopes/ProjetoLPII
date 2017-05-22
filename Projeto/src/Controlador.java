@@ -162,19 +162,9 @@ public class Controlador {
                                 Time[] adversarios = p.getAdversarios();
                                 if (p.getLocal() != null && adversarios[0] != null && adversarios[1] != null) {
                                     if (p.getLocal().getEstado().equals(estado)) {
-                                        if (adversarios[0] == null) {
-                                            resposta += "Rodada " + (i + 1) + " - "
-                                                    + adversarios[1].getNome() + " não jogará\n";
-                                        } else if (adversarios[1] == null) {
-                                            resposta += "Rodada " + (i + 1) + " - "
-                                                    + adversarios[0].getNome() + " não jogará\n";
-                                        } else {
-                                            resposta += "Rodada " + (i + 1) + " - "
-                                                    + adversarios[0].getNome() + " vs "
-                                                    + adversarios[1].getNome() + " - "
-                                                    + p.getLocal().getCidade() + "/"
-                                                    + p.getLocal().getEstado() + "\n";
-                                        }
+                                        resposta += "Rodada " + (i + 1) + "   "
+                                                + rodadas[i].getDataFormatada() + "   " + p.toString()
+                                                + "\n";
                                     }
                                 }
                             }
@@ -186,20 +176,9 @@ public class Controlador {
                             if (rodadas[i].getData().get(Calendar.MONTH) == mes) {
                                 for (int j = 0; j < qtdPartidasPorRodada; j++) {
                                     Partida p = rodadas[i].getPartida(j);
-                                    Time[] adversarios = p.getAdversarios();
-                                    if (adversarios[0] == null) {
-                                        resposta += "Rodada " + (i + 1) + " - "
-                                                + adversarios[1].getNome() + " não jogará\n";
-                                    } else if (adversarios[1] == null) {
-                                        resposta += "Rodada " + (i + 1) + " - "
-                                                + adversarios[0].getNome() + " não jogará\n";
-                                    } else {
-                                        resposta += "Rodada " + (i + 1) + " - "
-                                                + adversarios[0].getNome() + " vs "
-                                                + adversarios[1].getNome() + " - "
-                                                + p.getLocal().getCidade() + "/"
-                                                + p.getLocal().getEstado() + "\n";
-                                    }
+                                    resposta += "Rodada " + (i + 1) + "   "
+                                                + rodadas[i].getDataFormatada() + "   " + p.toString()
+                                                + "\n";
                                 }
                             }
                         }

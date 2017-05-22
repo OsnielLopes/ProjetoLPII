@@ -216,7 +216,7 @@ public class Tela {
         
         JOptionPane.showMessageDialog(null, panel);
           
-        return times[comboBoxCidades.getSelectedIndex()].getCidade();
+        return cidadesVetor[comboBoxCidades.getSelectedIndex()];
     }
 
     //permitir que a pessoa digite o nome do estado
@@ -239,7 +239,7 @@ public class Tela {
         
         JOptionPane.showMessageDialog(null, panel);
         
-        return times[comboBoxEstado.getSelectedIndex()].getEstado();
+        return estadosVetor[comboBoxEstado.getSelectedIndex()];
     }
 
     //exibir combobox com os meses do ano, retornar o numero do mes
