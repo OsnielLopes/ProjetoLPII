@@ -194,25 +194,23 @@ public class Tela {
 //CIDIGO NOVO ARRAY
     public static String leCidade(Time[] times) {
         JPanel panel = new JPanel();
-        ArrayList<String> cidades = new ArrayList<String>();
-        for(int i = 0; i < times.length; i++){
-            cidades[i]0 = times[i].getCidade();
-        }
-        JLabel labelCidade = new JLabel("Digite a cidade escolhida: ");
-        panel.add(labelCidade);
-        JTextField textFieldCidade = new JTextField(10);
-        panel.add(textFieldCidade);
-        
-        int result = JOptionPane.showOptionDialog(null, panel, "Tabela de Jogos", 
-                     JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, opcoes, null);
-        if(result == JOptionPane.YES_OPTION){
-            String cidade = textFieldCidade.getText();
-            if (cidade.isEmpty() || cidade.equals(" ")){
-                return leCidade();
+        ArrayList<String> cidades = new ArrayList<>();
+        for (Time time : times) {
+            String cidadeNova = time.getCidade();
+            if(!cidades.contains(cidadeNova)){
+                cidades.add(cidadeNova);
             }
-            return cidade;
         }
-        return leCidade();
+        String[] cidadesVetor = cidades.toArray(new String[cidades.size()]);
+        
+        JLabel labelCidade = new JLabel("Escolha uma cidade: ");
+        panel.add(labelCidade);
+        JComboBox comboBoxCidades = new JComboBox(cidadesVetor);
+        panel.add(comboBoxCidades);
+        
+        JOptionPane.showMessageDialog(null, panel);
+        
+        return times[comboBoxCidades.getSelectedIndex()].getCidade();
     }
     //CODIGO LECidade que estava antes
     //permitir que a pessoa digite o nome da cidade
