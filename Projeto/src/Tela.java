@@ -98,20 +98,23 @@ public class Tela {
         Object opcoes[] = {"OK", "Cancelar"};
         JPanel panel = new JPanel();
         
-        JLabel labelAno = new JLabel("Ano: ");
-        panel.add(labelAno);
-        JTextField textFieldAno = new JTextField(5);
-        panel.add(textFieldAno);
-        
-        JLabel labelMes = new JLabel("Mês: ");
-        panel.add(labelMes);
-        JTextField textFieldMes = new JTextField(5);
-        panel.add(textFieldMes);
+        JLabel mensagem = new JLabel("Data do inicio do Campeonato");
+        panel.add(mensagem);        
         
         JLabel labelDia = new JLabel("Dia: ");
         panel.add(labelDia);
         JTextField textFieldDia = new JTextField(5);
         panel.add(textFieldDia);
+        
+        JLabel labelMes = new JLabel("Mes: ");
+        panel.add(labelMes);
+        JTextField textFieldMes = new JTextField(5);
+        panel.add(textFieldMes);
+        
+        JLabel labelAno = new JLabel("Ano: ");
+        panel.add(labelAno);
+        JTextField textFieldAno = new JTextField(5);
+        panel.add(textFieldAno);
         
         int result = JOptionPane.showOptionDialog(null, panel, "Tabela de Jogos", 
                      JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, opcoes, null);
@@ -212,49 +215,28 @@ public class Tela {
         
         return times[comboBoxCidades.getSelectedIndex()].getCidade();
     }
-    //CODIGO LECidade que estava antes
-    //permitir que a pessoa digite o nome da cidade
-    /*public static String leCidade() {
-        Object opcoes[] = {"OK", "Cancelar"};
-        JPanel panel = new JPanel();
-        
-        JLabel labelCidade = new JLabel("Digite a cidade escolhida: ");
-        panel.add(labelCidade);
-        JTextField textFieldCidade = new JTextField(10);
-        panel.add(textFieldCidade);
-        
-        int result = JOptionPane.showOptionDialog(null, panel, "Tabela de Jogos", 
-                     JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, opcoes, null);
-        if(result == JOptionPane.YES_OPTION){
-            String cidade = textFieldCidade.getText();
-            if (cidade.isEmpty() || cidade.equals(" ")){
-                return leCidade();
-            }
-            return cidade;
-        }
-        return leCidade();
-    }*/
 
     //permitir que a pessoa digite o nome do estado
-    public static String leEstado() {
-        Object opcoes[] = {"OK", "Cancelar"};
+    
+    public static String leEstado(Time[] times) {
         JPanel panel = new JPanel();
-        
-        JLabel labelEstado = new JLabel("Digite o estado escolhido: ");
-        panel.add(labelEstado);
-        JTextField textFieldEstado = new JTextField(10);
-        panel.add(textFieldEstado);
-        
-        int result = JOptionPane.showOptionDialog(null, panel, "Tabela de Jogos", 
-                     JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, opcoes, null);
-        if(result == JOptionPane.YES_OPTION){
-            String estado = textFieldEstado.getText();
-            if (estado.isEmpty() || estado.equals(" ")){
-                return leEstado();
+        ArrayList<String> estado = new ArrayList<>();
+        for (Time time : times) {
+            String estadoNova = time.getEstado();
+            if(!estado.contains(estadoNova)){
+                estado.add(estadoNova);
             }
-            return estado;
         }
-        return leEstado();
+        String[] estadosVetor = estado.toArray(new String[estado.size()]);
+        
+        JLabel labelEstado = new JLabel("Escolha um Estado: ");
+        panel.add(labelEstado);
+        JComboBox comboBoxEstado = new JComboBox(estadosVetor);
+        panel.add(comboBoxEstado);
+        
+        JOptionPane.showMessageDialog(null, panel);
+        
+        return times[comboBoxEstado.getSelectedIndex()].getEstado();
     }
 
     //exibir combobox com os meses do ano, retornar o numero do mes
