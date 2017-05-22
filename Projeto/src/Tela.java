@@ -188,6 +188,8 @@ public class Tela {
         for(int i = 0; i < times.length; i++){
             nomeTimes[i] = times[i].getNome();
         }
+        JLabel labelEstado = new JLabel("Escolha um time !");
+        panel.add(labelEstado);
         JComboBox comboBoxTimes = new JComboBox(nomeTimes);
         panel.add(comboBoxTimes);
         JOptionPane.showMessageDialog(null, panel);
@@ -248,37 +250,16 @@ public class Tela {
         panel.add(comboBoxMes);
         JOptionPane.showMessageDialog(null, panel);
         int indexMes = comboBoxMes.getSelectedIndex();
-        if(indexMes == 0){
             return indexMes + 1;
-        }else if(indexMes == 1){
-            return indexMes + 1;
-        }else if(indexMes == 2){
-            return indexMes + 1;
-        }else if(indexMes == 3){
-            return indexMes + 1;
-        }else if(indexMes == 4){
-            return indexMes + 1;
-        }else if(indexMes == 5){
-            return indexMes + 1;
-        }else if(indexMes == 6){
-            return indexMes + 1;
-        }else if(indexMes == 7){
-            return indexMes + 1;
-        }else if(indexMes == 8){
-            return indexMes + 1;
-        }else if(indexMes == 9){
-            return indexMes + 1;
-        }else if(indexMes == 10){
-            return indexMes + 1;
-        }else if(indexMes == 11){
-            return indexMes + 1;
-        }
-        return escolheMes();
     }
 
     //exibir resultado da pesquisa
     public static void exibeResultado(String resposta) {
-        JOptionPane.showMessageDialog(null, resposta);
+        if(resposta != null){
+            JOptionPane.showMessageDialog(null, resposta);
+        }else{
+            JOptionPane.showMessageDialog(null, "Não há jogos registrados");
+        }
     }
 
     //exibe uma tela para que o usuário escreva o nome do arquivo que será gravado 
@@ -288,7 +269,7 @@ public class Tela {
         
         JLabel labelArquivo = new JLabel("Digite o nome do arquivo: ");
         panel.add(labelArquivo);
-        JTextField textFieldArquivo = new JTextField();
+        JTextField textFieldArquivo = new JTextField(10);
         panel.add(textFieldArquivo);
         
         int result = JOptionPane.showOptionDialog(null, panel, "Tabela de Jogos", 
