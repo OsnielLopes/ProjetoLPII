@@ -188,7 +188,7 @@ public class Tela {
         for(int i = 0; i < times.length; i++){
             nomeTimes[i] = times[i].getNome();
         }
-        JLabel labelEstado = new JLabel("Escolha um time !");
+        JLabel labelEstado = new JLabel("Escolha um time: ");
         panel.add(labelEstado);
         JComboBox comboBoxTimes = new JComboBox(nomeTimes);
         panel.add(comboBoxTimes);
@@ -282,6 +282,18 @@ public class Tela {
             return arquivo;
         }
         return informaNomeArquivo();
+    }
+    
+    public static void arquivoGravado(){
+        JOptionPane.showMessageDialog(null, "ARQUIVO GRAVADO COM SUCESSO");
+    }
+    
+    public static void arquivoNaoEncontrado(){
+        JOptionPane.showMessageDialog(null, "ARQUIVO NÃO FOI ENCONTRADO");
+    }
+    
+    public static void separadorErrado(){
+        JOptionPane.showMessageDialog(null, "Não foi possivel usar o separador dado");
     }
 
 }
