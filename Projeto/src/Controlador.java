@@ -5,18 +5,18 @@ import java.util.Calendar;
 public class Controlador {
 
     public static void main(String[] args) throws IOException {
-        OpcEntrada opc = Tela.opcLeitura();
         Time[] times = null;
-        if (opc.equals(OpcEntrada.Console)) {
-            times = leitura();
-        } else if (opc.equals(OpcEntrada.Arquivo)) {
-            do {
+        do {
+            OpcEntrada opc = Tela.opcLeitura();
+            if (opc.equals(OpcEntrada.Console)) {
+                times = leitura();
+            } else if (opc.equals(OpcEntrada.Arquivo)) {
                 String[] infoLeituraArquivo = Tela.getInfoLeituraArquivo();
-                if (infoLeituraArquivo != null) {
-                    times = leitura(infoLeituraArquivo[0], infoLeituraArquivo[1]);
+                if(infoLeituraArquivo != null){
+                times = leitura(infoLeituraArquivo[0], infoLeituraArquivo[1]);
                 }
-            } while (times == null);
-        }
+            }
+        } while (times == null);
 
         int qtdTimes = times.length;
         boolean qtdTimesEPar = qtdTimes % 2 == 0;
@@ -219,9 +219,8 @@ public class Controlador {
             //opcMenu = OpcMenu.sair;
         } while (opcMenu != OpcMenu.sair);
 
-    }
+    } //Instanciar Times Manualmente
 
-    //Instanciar Times Manualmente
     private static Time[] leitura() {
         int qtdTimes = Tela.qtdTimes();
         Time times[] = new Time[qtdTimes];
@@ -231,6 +230,8 @@ public class Controlador {
             if (time != null) {
                 times[i] = new Time(time[0], time[1], time[2]);
                 i += 1;
+            }else{
+                return null;
             }
         } while (i < qtdTimes);
         return times;
